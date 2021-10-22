@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prod
+  name: prod
+  namespace: demo-eureka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prod
+  template:
+    metadata:
+      labels:
+        app: prod
+    spec:
+      hostname: prod
+      containers:
+        - image: harbor.apps-contour.awstmc.sschmidt.ch/demos/blue-green-canary:0.2
+          name: prod
+          env:
+            - name: BACKGROUND_COLOR
+              value: "green"
+            - name: SPRING_APPLICATION_NAME
+              value: "prod"

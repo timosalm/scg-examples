@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: blue
+  name: blue
+  namespace: demo-eureka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blue
+  template:
+    metadata:
+      labels:
+        app: blue
+    spec:
+      hostname: blue
+      containers:
+        - image: harbor.apps-contour.awstmc.sschmidt.ch/demos/blue-green-canary:0.2
+          name: blue
+          env:
+          - name: BACKGROUND_COLOR
+            value: "blue"

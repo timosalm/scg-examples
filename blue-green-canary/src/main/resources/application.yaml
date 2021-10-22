@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: blue-green-canary
+background-color: blue
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
