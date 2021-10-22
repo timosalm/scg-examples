@@ -1,0 +1,188 @@
+apiVersion: v1
+items:
+- apiVersion: tanzu.vmware.com/v1
+  kind: SpringCloudGatewayRouteConfig
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"tanzu.vmware.com/v1","kind":"SpringCloudGatewayRouteConfig","metadata":{"annotations":{},"name":"animal-rescue-backend-route-config","namespace":"animal-rescue"},"spec":{"routes":[{"description":"Retrieve all of the animals who are up for pet adoption.","filters":["RateLimit=2,10s"],"predicates":["Path=/api/animals","Method=GET"],"tags":["pet adoption"],"title":"Retrieve pets for adoption."},{"description":"Manage pet adoptions.","filters":["Scopes=animals.adopt"],"model":{"requestBody":{"content":{"application/json":{"schema":{"description":"Adoption request schema","properties":{"adopterName":{"type":"string"},"email":{"format":"email","type":"string"},"notes":{"type":"string"}},"required":["adopterName","email"],"type":"object"}}},"description":"Manage adoption requests"}},"predicates":["Path=/api/animals/{animalId}/adoption-requests","Method=POST"],"ssoEnabled":true,"tags":["pet adoption"],"title":"Pet adoption API","tokenRelay":true},{"description":"Manage pet adoptions.","filters":["Scopes=animals.adopt"],"model":{"requestBody":{"content":{"application/json":{"schema":{"description":"Adoption request schema","properties":{"adopterName":{"type":"string"},"email":{"format":"email","type":"string"},"notes":{"type":"string"}},"required":["adopterName","email"],"type":"object"}}},"description":"Manage adoption requests"}},"predicates":["Path=/api/animals/{animalId}/adoption-requests/{adoptionId}","Method=PUT,DELETE"],"ssoEnabled":true,"tags":["pet adoption"],"title":"Pet adoption API","tokenRelay":true},{"description":"Access API actuator endpoints to provide current status of backend service.","predicates":["Path=/api/actuator/**"],"tags":["actuator"],"title":"API Actuator endpoints"},{"description":"Retrieve the current authenticated user's information.","predicates":["Path=/api/whoami","Method=GET"],"ssoEnabled":true,"tags":["sso"],"title":"Retrieve user information","tokenRelay":true}],"service":{"name":"animal-rescue-backend"}}}
+    creationTimestamp: "2021-10-06T12:06:06Z"
+    generation: 1
+    managedFields:
+    - apiVersion: tanzu.vmware.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          .: {}
+          f:routes: {}
+          f:service:
+            .: {}
+            f:name: {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: "2021-10-06T12:06:06Z"
+    name: animal-rescue-backend-route-config
+    namespace: animal-rescue
+    resourceVersion: "9974064"
+    selfLink: /apis/tanzu.vmware.com/v1/namespaces/animal-rescue/springcloudgatewayrouteconfigs/animal-rescue-backend-route-config
+    uid: 4f65e597-e2a1-4310-8d45-2ce96e642fc8
+  spec:
+    routes:
+    - description: Retrieve all of the animals who are up for pet adoption.
+      filters:
+      - RateLimit=2,10s
+      predicates:
+      - Path=/api/animals
+      - Method=GET
+      ssoEnabled: false
+      tags:
+      - pet adoption
+      title: Retrieve pets for adoption.
+      tokenRelay: false
+    - description: Manage pet adoptions.
+      filters:
+      - Scopes=animals.adopt
+      model:
+        requestBody:
+          content:
+            application/json:
+              schema:
+                description: Adoption request schema
+                properties:
+                  adopterName:
+                    type: string
+                  email:
+                    format: email
+                    type: string
+                  notes:
+                    type: string
+                required:
+                - adopterName
+                - email
+                type: object
+          description: Manage adoption requests
+      predicates:
+      - Path=/api/animals/{animalId}/adoption-requests
+      - Method=POST
+      ssoEnabled: true
+      tags:
+      - pet adoption
+      title: Pet adoption API
+      tokenRelay: true
+    - description: Manage pet adoptions.
+      filters:
+      - Scopes=animals.adopt
+      model:
+        requestBody:
+          content:
+            application/json:
+              schema:
+                description: Adoption request schema
+                properties:
+                  adopterName:
+                    type: string
+                  email:
+                    format: email
+                    type: string
+                  notes:
+                    type: string
+                required:
+                - adopterName
+                - email
+                type: object
+          description: Manage adoption requests
+      predicates:
+      - Path=/api/animals/{animalId}/adoption-requests/{adoptionId}
+      - Method=PUT,DELETE
+      ssoEnabled: true
+      tags:
+      - pet adoption
+      title: Pet adoption API
+      tokenRelay: true
+    - description: Access API actuator endpoints to provide current status of backend
+        service.
+      predicates:
+      - Path=/api/actuator/**
+      ssoEnabled: false
+      tags:
+      - actuator
+      title: API Actuator endpoints
+      tokenRelay: false
+    - description: Retrieve the current authenticated user's information.
+      predicates:
+      - Path=/api/whoami
+      - Method=GET
+      ssoEnabled: true
+      tags:
+      - sso
+      title: Retrieve user information
+      tokenRelay: true
+    service:
+      name: animal-rescue-backend
+- apiVersion: tanzu.vmware.com/v1
+  kind: SpringCloudGatewayRouteConfig
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"tanzu.vmware.com/v1","kind":"SpringCloudGatewayRouteConfig","metadata":{"annotations":{},"name":"animal-rescue-frontend-route-config","namespace":"animal-rescue"},"spec":{"routes":[{"description":"SSO enabled path used by the login button","filters":["StripPrefix=1","RedirectTo=302, /rescue"],"order":0,"predicates":["Path=/rescue/login","Method=GET"],"ssoEnabled":true,"tags":["sso"],"title":"Animal Rescue login link"},{"description":"Animal Rescue home page that doesn't require SSO login","filters":["StripPrefix=1"],"order":1000,"predicates":["Path=/rescue/**","Method=GET"],"tags":["ui"],"title":"Animal Rescue home page"}],"service":{"name":"animal-rescue-frontend"}}}
+    creationTimestamp: "2021-10-06T12:06:06Z"
+    generation: 1
+    managedFields:
+    - apiVersion: tanzu.vmware.com/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          .: {}
+          f:routes: {}
+          f:service:
+            .: {}
+            f:name: {}
+      manager: kubectl-client-side-apply
+      operation: Update
+      time: "2021-10-06T12:06:06Z"
+    name: animal-rescue-frontend-route-config
+    namespace: animal-rescue
+    resourceVersion: "9974067"
+    selfLink: /apis/tanzu.vmware.com/v1/namespaces/animal-rescue/springcloudgatewayrouteconfigs/animal-rescue-frontend-route-config
+    uid: 4c439537-0cf8-4d5a-892a-a13677a98a57
+  spec:
+    routes:
+    - description: SSO enabled path used by the login button
+      filters:
+      - StripPrefix=1
+      - RedirectTo=302, /rescue
+      order: 0
+      predicates:
+      - Path=/rescue/login
+      - Method=GET
+      ssoEnabled: true
+      tags:
+      - sso
+      title: Animal Rescue login link
+      tokenRelay: false
+    - description: Animal Rescue home page that doesn't require SSO login
+      filters:
+      - StripPrefix=1
+      order: 1000
+      predicates:
+      - Path=/rescue/**
+      - Method=GET
+      ssoEnabled: false
+      tags:
+      - ui
+      title: Animal Rescue home page
+      tokenRelay: false
+    service:
+      name: animal-rescue-frontend
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

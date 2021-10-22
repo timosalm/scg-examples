@@ -1,0 +1,11 @@
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayMapping
+metadata:
+  name: eureka-mapping
+  namespace: demo-eureka
+spec:
+  gatewayRef:
+    name: gateway
+    namespace: demo-eureka
+  routeConfigRef:
+    name: eureka-route-config

@@ -1,0 +1,20 @@
+apiVersion: tanzu.vmware.com/v1
+kind: SpringCloudGateway
+metadata:
+  name: gateway
+  namespace: demo-eureka
+spec:
+  api:
+    serverUrl: http://demo-eureka.apps-contour.awstmc.sschmidt.ch
+  count: 1
+  env:
+  - name: eureka.client.serviceUrl.defaultZone
+    value: "http://eureka-server:8761/eureka/"
+  - name: spring.cloud.discovery.enabled
+    value: "true"
+  - name: eureka.client.enabled
+    value: "true"
+  - name: spring.cloud.gateway.discovery.locator.enabled
+    value: "true"
+  - name: spring.cloud.gateway.discovery.locator.lowerCaseServiceId
+    value: "true"

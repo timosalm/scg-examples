@@ -1,0 +1,25 @@
+spring:
+  cloud.gateway:
+    discovery.locator:
+      enabled: true
+      lowerCaseServiceId: true
+    routes:
+    - id: prod
+      uri: lb://prod
+      predicates:
+      - Path=/my-prod-app
+      - Weight=group1, 8
+      filters:
+      - StripPrefix=1
+    - id: canary
+      uri: lb://canary
+      predicates:
+      - Path=/my-prod-app
+      - Weight=group1, 2
+      filters:
+      - StripPrefix=1
+  application.name: gateway
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
