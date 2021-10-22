@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: oss-scg
+  name: oss-scg
+  namespace: demo-eureka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oss-scg
+  template:
+    metadata:
+      labels:
+        app: oss-scg
+    spec:
+      containers:
+        - image: harbor.apps-contour.awstmc.sschmidt.ch/demos/eureka-scg:0.6
+          name: oss-scg

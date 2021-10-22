@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: eureka-client
+  name: eureka-client
+  namespace: demo-eureka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka-client
+  template:
+    metadata:
+      labels:
+        app: eureka-client
+    spec:
+      hostname: eureka-client
+      containers:
+        - image: harbor.apps-contour.awstmc.sschmidt.ch/demos/eureka-client:0.5
+          name: eureka-client
